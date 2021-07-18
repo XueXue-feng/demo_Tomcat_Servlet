@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Rall | Smithy</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Rall Creative Ajax Portfolio" />
+        <meta name="author" content="SoonLabs">
+
+
+        <!-- FAVICON -->
+        <link rel="shortcut icon" href="assets/images/favicon/favico.png">
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css"  >
+        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.min.css"  >
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"  >
+        <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css"  >
+        <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css"  >
+        <link rel="stylesheet" type="text/css" href="assets/css/rall.main.css"  >
+        <link rel="stylesheet" type="text/css" href="assets/css/rall.responsive.css"  >
+    </head>
+    <body data-page="scroll">
+
+
+        <!-- PAGE LOADING -->
+        <div class="loading">
+            <div class="loading-wrapper">
+                <object data="assets/images/load.svg"   type="image/svg+xml"></object>
+            </div>
+        </div>
+
+        <!-- SUB LOADER -->
+        <div class="sub-loading"></div>
+        <div class="page-loading"></div>
+
+        <!-- HEADER -->
+        <header id = "header">
+		</header>
+
+
+        <!-- MAIN -->
+        <main data-page="work-page">
+
+            <div class="scroll-content" id="scroll-content" data-page="scroll-content">
+
+                <!-- PAGE TOP IMAGE -->
+                <div class="top-image" id="top-image">
+                    <div class="top-image-wrapper">
+						<!-- 最大的背景图 -->
+
+                    </div>
+                    <div class="top-content-wrapper">
+                        <div class="top-image-content">
+							<!-- 上面的字体 -->
+
+                        </div>
+                        <div class="top-content-scroll">scroll down</div>
+                    </div>
+                </div>
+
+                <!-- PAGE WORK CONTENT -->
+                <div class="main-content">
+
+                    <!-- SPACE -->
+                    <div class="space150"></div>
+
+                    <!-- COLUMN CONTENT -->
+                    <div class="multi-column">
+                        <div class="multi-column-wrapper row">
+                            <div class="content-column col-lg-9 col-md-9 col-xs-12 col-12">
+                                <div class="content-info" id = "content-info-main">
+                                    <!--main演讲-->
+                                </div>
+                            </div>
+
+                            <div class="content-column col-lg-3 col-md-3 col-xs-12 col-12" id = "content-column-main">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SPACE -->
+                    <div class="space150"></div>
+
+                    <!-- SINGLE IMAGE -->
+                    <div class="single-image">
+                        <div class="single-image-wrapper">
+                            <figure id = "figure-main">
+
+                            </figure>
+                        </div>
+                    </div>
+
+                    <!-- SPACE -->
+                    <div class="space100"></div>
+
+                    <!-- COLUMN CONTENT -->
+                     <div class="multi-column">
+                         <div class="multi-column-wrapper row">
+                             <div class="content-column col-lg-12 col-md-12 col-xs-12 col-12">
+                                 <div class="content-info centered" id = "content-info-second">
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                     <!-- SPACE -->
+                     <div class="space100"></div>
+
+
+                    <!-- COLUMN CONTENT -->
+                    <div class="multi-column">
+                        <div class="multi-column-wrapper row" id = "multi-column-wrapper-second">
+
+                        </div>
+                    </div>
+
+
+                    <!-- SPACE -->
+                    <div class="space100"></div>
+
+                    <!-- NEXT PROJECT -->
+                    <div class="next-work">
+                        <p>Next Project</p>
+                        <a href="white-look.html"   data-type="page-load">
+                            <div class="next-work-button">
+                                <div class="next-work-title">White Look</div>
+                                <div class="next-work-detail">View Detail</div>
+                            </div>
+                        </a>
+
+                    </div>
+
+
+                    <!-- SPACE -->
+                    <div class="space100"></div>
+
+                </div>
+            </div>
+
+        </main>
+
+        <div id="cursor" class="">
+            <div class="cursor-plus"><i class="fas fa-plus"></i></div>
+        </div>
+
+        <!-- JS -->
+        <script src="assets/js/jquery-1.12.4.min.js"  ></script>
+        <script src="assets/js/webapi.js"></script>
+        <script src="assets/js/rall.libraries.js"  ></script>
+        <script src="assets/js/rall.main.js"  ></script>
+	    <script>
+		/* 入口函数 */
+		$(document).ready(function () {
+			$("#header").load("header.html");
+			$("#footer").load("footer.html");
+		});
+
+		$(function () {
+		    var tag = location.href.split("=")[1];
+		    /* <div class="top-image-image parallax-layer" style="background-image: url('assets/images/work/smithy/001.jpg')" data-depth="0.1"></div>*/
+            $.post("load/loadOneDataServlet",{
+                'tag':tag
+            },function (data) {
+                    $("#top-image > .top-image-wrapper").html('<div class="top-image-image parallax-layer" style="background-image: url('+data.mainImage+')" data-depth="0.1"></div>');
+                    $("#content-info-main").html('<h2>'+data.characteristicTopic+'</h2>\n' +
+                        '                                    <p>'+data.characteristicMain+'</p>');
+                    $("#content-column-main").html('<div class="content-client">'+data.characteristicCompany+'</div>\n' +
+                        '                               <div class="content-date">'+data.characteristicAddress+'</div>\n' +
+                        '                               <div class="content-service">'+data.characteristicTime+'</div>');
+                $(".top-content-wrapper > .top-image-content").html('<div class="top-work-category"><p>'+data.tag+'</p></div>\n' +
+                    '                            <div class="top-work-name"><h1>'+data.tagDiscribe+'</h1></div>');
+
+                $("#figure-main").html('<img alt="Rall" src="'+data.subImage1+'"  >');
+                $("#multi-column-wrapper-second").html('<div class="content-column col-lg-6 col-md-6 col-xs-12 col-12">\n' +
+                    '                                <div class="content-image">\n' +
+                    '                                    <figure>\n' +
+                    '                                        <a class="work-popup" href="'+data.subImage2+'"  >\n' +
+                    '                                            <img alt="Rall" src="'+data.subImage2+'"  >\n' +
+                    '                                        </a>\n' +
+                    '                                    </figure>\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n ' +
+                    '<div class="content-column col-lg-6 col-md-6 col-xs-12 col-12">\n' +
+                    '                                <div class="content-image">\n' +
+                    '                                    <figure>\n' +
+                    '                                        <a class="work-popup" href="'+data.subImage3+'"  >\n' +
+                    '                                            <img alt="Rall" src="'+data.subImage3+'"  >\n' +
+                    '                                        </a>\n' +
+                    '                                    </figure>\n' +
+                    '                                </div>\n' +
+                    '                            </div>');
+                if(data.subCharacteristicTopic != null){
+                    $("#content-info-second").html('<h2>'+data.subCharacteristicTopic+'</h2>\n' +
+                        '                                     <p>'+data.subHaracteristicMain+'</p>');
+                }
+
+            },"json");
+        });
+
+		</script>
+    </body>
+</html>
